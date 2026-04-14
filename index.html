@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clawbot — Persistent Agentic AI Wrapper for Claude Code</title>
+    <meta name="description" content="A self-healing, always-on AI agent that wraps Claude Code CLI with Discord and Telegram channels, systemd watchdog, and persistent memory.">
+    <meta property="og:title" content="Clawbot">
+    <meta property="og:description" content="Your AI agent, always on.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- ===== NAV ===== -->
+    <nav class="nav">
+        <div class="nav-inner">
+            <a href="/" class="nav-logo">
+                <span class="logo-icon">&#x1F980;</span>
+                <span class="logo-text">Clawbot</span>
+            </a>
+            <div class="nav-right">
+                <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+                    <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                    <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                </button>
+                <a href="https://github.com/Tradd-Horne/clawbot" class="nav-link" target="_blank" rel="noopener">GitHub</a>
+                <a href="#architecture" class="btn btn-primary">How it works</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ===== HERO ===== -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-badge">Open source</div>
+            <h1 class="hero-title">Your AI agent,<br>always on.</h1>
+            <p class="hero-subtitle">Clawbot wraps Claude Code CLI in a persistent, self-healing runtime with Discord and Telegram channels, systemd watchdog, and long-term memory.</p>
+            <div class="hero-actions">
+                <a href="https://github.com/Tradd-Horne/clawbot" class="btn btn-primary" target="_blank" rel="noopener">View on GitHub</a>
+                <a href="#architecture" class="btn btn-secondary">See architecture</a>
+            </div>
+
+            <!-- Terminal mockup -->
+            <div class="terminal-mockup">
+                <div class="terminal-bar">
+                    <span class="terminal-dot terminal-dot--red"></span>
+                    <span class="terminal-dot terminal-dot--yellow"></span>
+                    <span class="terminal-dot terminal-dot--green"></span>
+                    <span class="terminal-title">clawbot &mdash; tmux</span>
+                </div>
+                <div class="terminal-body">
+                    <div class="terminal-line"><span class="t-prompt">$</span> <span class="t-cmd">systemctl --user status claude-channels.timer</span></div>
+                    <div class="terminal-line t-output">● claude-channels.timer - Run Claude channels watchdog every minute</div>
+                    <div class="terminal-line t-output">&nbsp;&nbsp;Active: <span class="t-green">active (waiting)</span></div>
+                    <div class="terminal-line t-output">&nbsp;&nbsp;Trigger: Mon 2026-04-14 02:44:11 UTC; <span class="t-dim">38s left</span></div>
+                    <div class="terminal-line"><span class="t-prompt">$</span> <span class="t-cmd">tail -3 ~/.claude/channels/claude-loop.log</span></div>
+                    <div class="terminal-line t-output">[2026-04-14 02:43:07] Watchdog: claude running, pane healthy</div>
+                    <div class="terminal-line t-output">[2026-04-14 02:43:07] Watchdog: no hang detected (content changed)</div>
+                    <div class="terminal-line t-output t-green">[2026-04-14 02:43:11] Watchdog: all clear ✓</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== WHAT IT DOES ===== -->
+    <section class="section" id="features">
+        <div class="container">
+            <h2 class="section-title">Runs Claude Code as a persistent background agent.</h2>
+            <p class="section-subtitle">Automatically responds to Discord and Telegram messages, self-heals on crash or hang, and maintains memory across every conversation.</p>
+
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                    </div>
+                    <h3>Discord &amp; Telegram</h3>
+                    <p>Listens on both platforms simultaneously. Responds to DMs and group messages with full Claude Code capabilities — file I/O, bash, web fetch, browser automation.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    </div>
+                    <h3>Self-healing watchdog</h3>
+                    <p>A systemd timer fires every 60 seconds with two-level detection. Level 1 catches crashes. Level 2 detects frozen spinners. Both trigger automatic recovery.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+                    </div>
+                    <h3>Persistent memory</h3>
+                    <p>File-based memory system with 23+ documents across user context, project state, feedback loops, and external references. Carries knowledge between every session.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                    </div>
+                    <h3>Browser automation</h3>
+                    <p>Playwright integration running headless Chromium — no sudo required. Screenshots, form fills, scraping, and full page interaction via userspace libs.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+                    </div>
+                    <h3>Full CLI access</h3>
+                    <p>Every tool Claude Code offers — bash, file read/write, grep, glob, git, web fetch, subagent spawning — available 24/7 without human prompting.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20V10"/><path d="M18 20V4"/><path d="M6 20v-4"/></svg>
+                    </div>
+                    <h3>Multi-project</h3>
+                    <p>Manages 57+ concurrent projects from a single instance. Project-level CLAUDE.md files, per-project memory, and context-aware responses across all of them.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== ARCHITECTURE ===== -->
+    <section class="section section--bordered" id="architecture">
+        <div class="container">
+            <h2 class="section-title">How it works.</h2>
+            <p class="section-subtitle">A systemd timer, a bash watchdog, and a tmux session — that's the entire runtime.</p>
+
+            <div class="arch-flow">
+                <div class="arch-step">
+                    <div class="arch-num">1</div>
+                    <div class="arch-content">
+                        <h4>systemd timer</h4>
+                        <p>Fires every 60 seconds. Calls the watchdog script. Survives reboots, logouts, and crashes.</p>
+                        <code>claude-channels.timer &rarr; claude-channels.service</code>
+                    </div>
+                </div>
+
+                <div class="arch-connector"></div>
+
+                <div class="arch-step">
+                    <div class="arch-num">2</div>
+                    <div class="arch-content">
+                        <h4>ensure-claude.sh</h4>
+                        <p>The watchdog. Checks if the clawbot tmux pane has a live Claude process. If not, recreates everything. If Claude is stuck (spinner frozen for ~2.5 min), kills and restarts.</p>
+                        <code>Level 1: crash detection &rarr; Level 2: hang detection</code>
+                    </div>
+                </div>
+
+                <div class="arch-connector"></div>
+
+                <div class="arch-step">
+                    <div class="arch-num">3</div>
+                    <div class="arch-content">
+                        <h4>claude-channels-loop.sh</h4>
+                        <p>Runs inside tmux. A <code>while true</code> loop that restarts Claude Code with channel plugins after any exit. 5-second backoff prevents CPU spinning.</p>
+                        <code>claude --channels plugin:discord plugin:telegram</code>
+                    </div>
+                </div>
+
+                <div class="arch-connector"></div>
+
+                <div class="arch-step">
+                    <div class="arch-num">4</div>
+                    <div class="arch-content">
+                        <h4>Claude Code CLI</h4>
+                        <p>The actual agent. Runs with <code>--dangerously-skip-permissions</code> and a curated deny-list. Responds to messages, executes tasks, maintains memory.</p>
+                        <code>Discord + Telegram &rarr; Claude &rarr; tools &rarr; response</code>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== INTEGRATIONS ===== -->
+    <section class="section" id="integrations">
+        <div class="container">
+            <h2 class="section-title">Connect to the tools you already use.</h2>
+            <p class="section-subtitle">Clawbot integrates with messaging platforms, browser automation, and external services through MCP servers and Claude's plugin system.</p>
+
+            <div class="integration-grid">
+                <div class="integration-card">
+                    <div class="integration-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg>
+                    </div>
+                    <h3>Discord</h3>
+                    <p>DM and group channel support with allowlist-based access control. Reply, react, edit, fetch history, and send file attachments.</p>
+                </div>
+
+                <div class="integration-card">
+                    <div class="integration-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+                    </div>
+                    <h3>Telegram</h3>
+                    <p>Bot API integration with DM support. Allowlist access, message replies, emoji reactions, file downloads, and edit-for-progress-updates.</p>
+                </div>
+
+                <div class="integration-card">
+                    <div class="integration-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                    </div>
+                    <h3>Playwright</h3>
+                    <p>Headless Chromium running entirely in userspace — no root needed. Automated screenshots, form interaction, and web scraping via MCP server.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SECURITY ===== -->
+    <section class="section section--bordered" id="security">
+        <div class="container">
+            <h2 class="section-title">Autonomous, not reckless.</h2>
+            <p class="section-subtitle">Runs with full tool access but a strict deny-list. The agent can do almost anything — except the things that would ruin your day.</p>
+
+            <div class="security-grid">
+                <div class="security-col">
+                    <h4 class="security-heading security-heading--allow">Allowed</h4>
+                    <ul class="security-list">
+                        <li><span class="check">&#10003;</span> Read any file</li>
+                        <li><span class="check">&#10003;</span> Write to ~/projects/**</li>
+                        <li><span class="check">&#10003;</span> Run bash commands</li>
+                        <li><span class="check">&#10003;</span> Git operations on feature branches</li>
+                        <li><span class="check">&#10003;</span> Web fetch and browser automation</li>
+                        <li><span class="check">&#10003;</span> Discord and Telegram replies</li>
+                        <li><span class="check">&#10003;</span> Create PRs via gh CLI</li>
+                    </ul>
+                </div>
+                <div class="security-col">
+                    <h4 class="security-heading security-heading--deny">Denied</h4>
+                    <ul class="security-list">
+                        <li><span class="cross">&#10007;</span> SSH or SCP</li>
+                        <li><span class="cross">&#10007;</span> Push to main/master</li>
+                        <li><span class="cross">&#10007;</span> sudo anything</li>
+                        <li><span class="cross">&#10007;</span> rm -rf</li>
+                        <li><span class="cross">&#10007;</span> Write .env files</li>
+                        <li><span class="cross">&#10007;</span> curl | bash</li>
+                        <li><span class="cross">&#10007;</span> Global npm installs</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== WATCHDOG DETAIL ===== -->
+    <section class="section" id="watchdog">
+        <div class="container">
+            <h2 class="section-title">Two-level failure detection.</h2>
+            <p class="section-subtitle">Most watchdogs check if a process exists. Clawbot checks if it's actually doing anything.</p>
+
+            <div class="feature-grid feature-grid--2col">
+                <div class="feature-card feature-card--level">
+                    <div class="level-badge">Level 1</div>
+                    <h3>Crash detection</h3>
+                    <p>Uses <code>ps -s &lt;pane_pid&gt;</code> to scope the process search to the tmux pane's session group. No false positives from other Claude instances. If neither Claude nor the loop script's bash is in that group — kill and recreate.</p>
+                </div>
+                <div class="feature-card feature-card--level">
+                    <div class="level-badge">Level 2</div>
+                    <h3>Hang detection</h3>
+                    <p>Captures the tmux pane twice, 1 second apart. If both snapshots are byte-identical and the footer shows "esc to interrupt" — the spinner is frozen. Requires 2 consecutive detections (~2.5 min) before killing. No premature restarts.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== MEMORY ===== -->
+    <section class="section section--bordered" id="memory">
+        <div class="container">
+            <h2 class="section-title">Memory that persists across sessions.</h2>
+            <p class="section-subtitle">A file-based memory system organised by type. The agent reads, writes, and updates its own knowledge base — no database required.</p>
+
+            <div class="memory-types">
+                <div class="memory-type">
+                    <div class="memory-type-header">
+                        <span class="memory-type-tag memory-type-tag--user">user</span>
+                        <span class="memory-type-name">User context</span>
+                    </div>
+                    <p>Who you are, your role, preferences, expertise level. Tailors responses to your specific background.</p>
+                </div>
+                <div class="memory-type">
+                    <div class="memory-type-header">
+                        <span class="memory-type-tag memory-type-tag--feedback">feedback</span>
+                        <span class="memory-type-name">Behaviour corrections</span>
+                    </div>
+                    <p>What to avoid, what worked. Includes why, so the agent can judge edge cases rather than blindly follow rules.</p>
+                </div>
+                <div class="memory-type">
+                    <div class="memory-type-header">
+                        <span class="memory-type-tag memory-type-tag--project">project</span>
+                        <span class="memory-type-name">Project state</span>
+                    </div>
+                    <p>Ongoing work, goals, deadlines, decisions. Context that isn't derivable from code or git history alone.</p>
+                </div>
+                <div class="memory-type">
+                    <div class="memory-type-header">
+                        <span class="memory-type-tag memory-type-tag--reference">reference</span>
+                        <span class="memory-type-name">External pointers</span>
+                    </div>
+                    <p>Where to find things in external systems — Linear boards, Grafana dashboards, API credentials, deployment docs.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== STACK ===== -->
+    <section class="section" id="stack">
+        <div class="container">
+            <h2 class="section-title">Built with boring, reliable tools.</h2>
+            <p class="section-subtitle">No orchestration framework. No LangChain. No vector database. Just bash, systemd, and tmux.</p>
+
+            <div class="stack-grid">
+                <div class="stack-item">
+                    <code>claude</code>
+                    <span>Claude Code CLI (Opus 4)</span>
+                </div>
+                <div class="stack-item">
+                    <code>tmux</code>
+                    <span>Persistent terminal session</span>
+                </div>
+                <div class="stack-item">
+                    <code>systemd</code>
+                    <span>Timer + oneshot service</span>
+                </div>
+                <div class="stack-item">
+                    <code>bash</code>
+                    <span>Watchdog + loop scripts</span>
+                </div>
+                <div class="stack-item">
+                    <code>playwright</code>
+                    <span>Headless browser (userspace)</span>
+                </div>
+                <div class="stack-item">
+                    <code>bun</code>
+                    <span>MCP server runtime</span>
+                </div>
+                <div class="stack-item">
+                    <code>gh</code>
+                    <span>GitHub CLI for PRs</span>
+                </div>
+                <div class="stack-item">
+                    <code>markdown</code>
+                    <span>Memory file format</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FAQ ===== -->
+    <section class="section section--bordered" id="faq">
+        <div class="container container--narrow">
+            <h2 class="section-title">FAQ</h2>
+
+            <div class="faq-list">
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Why not use LangChain, CrewAI, or an agent framework?</span>
+                        <span class="faq-toggle">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Claude Code CLI already is the agent — it has tool use, memory, subagent spawning, and multi-step reasoning built in. Wrapping it in another framework adds complexity without capability. Clawbot just makes it persistent and reachable.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>What happens when Claude crashes?</span>
+                        <span class="faq-toggle">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>The loop script (<code>claude-channels-loop.sh</code>) catches the exit and restarts Claude within 5 seconds. If the entire tmux session disappears, the systemd watchdog recreates it within 60 seconds. If Claude hangs (frozen spinner), the watchdog detects it across two consecutive checks (~2.5 min) and kills the process so the loop can restart it.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Can anyone message the bot?</span>
+                        <span class="faq-toggle">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>No. Both Discord and Telegram use allowlist-based access control. Only approved user IDs can trigger responses. The allowlist is managed via <code>/discord:access</code> and <code>/telegram:access</code> skills — never from within a channel message (that would be a prompt injection vector).</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Why --dangerously-skip-permissions?</span>
+                        <span class="faq-toggle">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Because the agent runs unattended — there's nobody to click "approve" on tool calls. The deny-list in <code>settings.json</code> still applies, so destructive operations (rm -rf, sudo, force-push, .env writes) are blocked regardless. It's autonomous within guardrails, not unlimited.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Can I run two instances with the same Discord bot token?</span>
+                        <span class="faq-toggle">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>No. Discord only allows one gateway connection per bot token. Running a second Claude CLI session with the Discord plugin loaded will steal the connection from the first. The watchdog must be the sole owner of the channel session.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>How does browser automation work without root?</span>
+                        <span class="faq-toggle">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Chromium's shared libraries (libatk, libnss3, libgbm, etc.) are downloaded as .deb packages, extracted with <code>dpkg -x</code> into a userspace directory, and loaded via <code>LD_LIBRARY_PATH</code>. No sudo required. Playwright launches Chromium with <code>--no-sandbox</code> for headless operation.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-logo">
+                <span class="logo-icon">&#x1F980;</span>
+                <span class="logo-text">Clawbot</span>
+            </div>
+            <div class="footer-links">
+                <div class="footer-col">
+                    <a href="https://github.com/Tradd-Horne/clawbot" target="_blank" rel="noopener">GitHub</a>
+                    <a href="#architecture">Architecture</a>
+                </div>
+                <div class="footer-col">
+                    <a href="#features">Features</a>
+                    <a href="#security">Security</a>
+                </div>
+                <div class="footer-col">
+                    <a href="#memory">Memory</a>
+                    <a href="#faq">FAQ</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Tradd Horne</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
